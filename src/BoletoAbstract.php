@@ -1727,7 +1727,7 @@ abstract class BoletoAbstract
         if ($dv == 10 || $dv == 11) {
             $dv = 0;
         }
-        echo "Digito: $dv; Resto: $resto <br><br><br>";
+
         return array(
             'digito' => $dv,
             'resto'  => $resto
