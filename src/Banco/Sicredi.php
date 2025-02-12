@@ -133,14 +133,11 @@ class Sicredi extends BoletoAbstract
 
         $numero = self::zeroFill($this->getAgencia(), 4) .
             self::zeroFill($this->getPosto(), 2) .
-            //'04' .
             self::zeroFill($this->getConta(), 5) .
             self::zeroFill($ano, 2) .
             $this->bytecode .
             self::zeroFill($this->getSequencial(), 5);
-        echo "Numero: " . $numero . "<br>";
         $dv = static::modulo11($numero);
-        echo "DV: " . var_dump($dv);
         return self::zeroFill($ano, 2) . '/' . $this->bytecode . self::zeroFill($this->getSequencial(), 5) . '-' . $dv['digito'];
     }
 

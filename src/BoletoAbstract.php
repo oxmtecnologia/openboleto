@@ -1699,7 +1699,7 @@ abstract class BoletoAbstract
      * @see Documentação em http://www.febraban.org.br/Acervo1.asp?id_texto=195&id_pagina=173&palavra=
      * @return array Retorna um array com as chaves 'digito' e 'resto'
      */
-    protected static function modulo11($num, $base = 9)
+    /*protected static function modulo11($num, $base = 9)
     {
         $fator = 2;
         $soma  = 0;
@@ -1732,5 +1732,35 @@ abstract class BoletoAbstract
             'digito' => $dv,
             'resto'  => $resto
         );
+    }*/
+    protected static function modulo11($num, $base = 9)
+    {
+        $fator = 2;
+
+        $soma = 0;
+        $parcial = [];
+        // Separacao dos numeros.
+        for ($i = strlen($num); $i > 0; $i--) {
+            //  Pega cada numero isoladamente.
+            $numeros[$i] = (int) substr($num, $i - 1, 1);
+            //  Efetua multiplicacao do numero pelo falor.
+            $parcial[$i] = $numeros[$i] * $fator;
+            //  Soma dos digitos.
+            $soma += $parcial[$i];
+            if ($fator == $base) {
+                //  Restaura fator de multiplicacao para 2.
+                $fator = 1;
+            }
+            $fator++;
+        }
+        $result = array(
+            'digito' => ($soma * 10) % 11,
+            // Remainder.
+            'resto' => $soma % 11,
+        );
+        if ($result['digito'] == 10) {
+            $result['digito'] = 0;
+        }
+        return $result;
     }
 }
