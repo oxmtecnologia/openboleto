@@ -1,12 +1,12 @@
 {
-    "name": "openboleto/openboleto",
+    "name": "oxmtecnologia/openboleto",
     "type": "library",
     "description": "Biblioteca para geração de boletos bancários.",
     "keywords": [
         "boleto",
         "boleto bancario"
     ],
-    "homepage": "http://github.com/openboleto/openboleto",
+    "homepage": "https://github.com/oxmtecnologia/openboleto",
     "license": "MIT",
     "authors": [
         {
