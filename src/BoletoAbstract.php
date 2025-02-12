@@ -1702,31 +1702,35 @@ abstract class BoletoAbstract
     protected static function modulo11($num, $base = 9)
     {
         $fator = 2;
-
-        $soma = 0;
-        $parcial = [];
-        // Separacao dos numeros.
+        $soma  = 0;
+        
+        // Percorre a string de trás para frente (direita para esquerda)
         for ($i = strlen($num); $i > 0; $i--) {
-            //  Pega cada numero isoladamente.
-            $numeros[$i] = (int) substr($num, $i - 1, 1);
-            //  Efetua multiplicacao do numero pelo falor.
-            $parcial[$i] = $numeros[$i] * $fator;
-            //  Soma dos digitos.
-            $soma += $parcial[$i];
-            if ($fator == $base) {
-                //  Restaura fator de multiplicacao para 2.
-                $fator = 1;
-            }
+            // Obtém cada dígito individualmente
+            $digito = (int) substr($num, $i - 1, 1);
+            
+            // Multiplica o dígito pelo fator e acumula na soma
+            $soma += $digito * $fator;
+            
+            // Incrementa o fator; se ultrapassar o valor máximo ($base), reinicia para 2
             $fator++;
+            if ($fator > $base) {
+                $fator = 2;
+            }
         }
-        $result = array(
-            'digito' => ($soma * 10) % 11,
-            // Remainder.
-            'resto' => $soma % 11,
+        
+        // Calcula o resto da divisão da soma por 11
+        $resto = $soma % 11;
+        
+        // Calcula o dígito verificador (DV)
+        $dv = 11 - $resto;
+        if ($dv == 10 || $dv == 11) {
+            $dv = 0;
+        }
+        
+        return array(
+            'digito' => $dv,
+            'resto'  => $resto
         );
-        if ($result['digito'] == 10) {
-            $result['digito'] = 0;
-        }
-        return $result;
     }
 }
