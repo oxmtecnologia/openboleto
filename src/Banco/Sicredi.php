@@ -132,8 +132,8 @@ class Sicredi extends BoletoAbstract
         $ano = date("y");
 
         $numero = self::zeroFill($this->getAgencia(), 4) .
-            //self::zeroFill($this->getPosto(), 2) .
-            '04' .
+            self::zeroFill($this->getPosto(), 2) .
+            //'04' .
             self::zeroFill($this->getConta(), 5) .
             self::zeroFill($ano, 2) .
             $this->bytecode .
